@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible"
+		content="IE=edge">
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1.0">
+	<title>
+		PLEASE PROVIDE YOUR DETAILS
+	</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+	<style>
+*{
+padding:0px;
+margin:0px;
+top:0px;
+bottom:0px;
+}
+		/* background-color: #05c46b; */
+.container {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 15px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: white;
+
+ 
+  
+  
+}
+
+/* On mouse-over, add a grey background color */
+.container:hover input ~ .checkmark {
+  background-color: white;
+}
+
+/* When the checkbox is checked, add a blue background */
+.container input:checked ~ .checkmark {
+  background-color: #2196F3;
+}
+
+
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+
+.container input:checked ~ .checkmark:after {
+
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.container .checkmark:after {
+  left: 9px;
+  top: 5px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+		
+		
+		body {
+		    background-image: linear-gradient(to bottom right,#fdd116,#19DC74);			
+		    font-family: Verdana;
+			text-align: center;
+	      /* Ensure full viewport height */
+            overflow: scroll; /* Prevent content overflow */
+		}
+   .logo {
+            max-width: 50%;
+            height: auto;
+        }
+
+        .logo-image-box {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            display: flex;
+            align-items: center;
+        }
+   
+	
+		form {
+			background-color: #fff;
+			max-width: 500px;
+			margin: 20px auto;
+			padding: 30px 20px;
+			box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.5);
+			border-radius: 20px;
+		}
+
+	
+		.form-control {
+			text-align: left;
+			margin-bottom: 25px;
+		}
+
+		
+		.form-control label {
+			display: block;
+			margin-bottom: 10px;
+		}
+
+	
+		.form-control input,
+		.form-control select,
+		.form-control textarea {
+			border: 1px solid #777;
+			border-radius: 2px;
+			font-family: inherit;
+			padding: 10px;
+			display: block;
+			width: 95%;
+		}
+	
+		button {
+		/* 	background-image:linear-gradient(to bottom right,#fdd116,#05c46b); */
+			background-color:#19DC74;
+			border: 1px solid #777;
+			border-radius: 2px;
+			 
+			font-family: inherit;
+			font-size: 21px;
+			display: block;
+			width: 100%;
+			margin-top: 50px;
+			margin-bottom: 20px;
+				box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.5);
+		}
+		#concern{
+		width: 95%;
+		}
+		.upper-bar{
+		    max-width:500px;
+            background-color: #fff;
+			max-width: 500px;
+			margin: 2px auto;
+			padding: 30px 20px;
+			box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.5);
+           
+}
+	</style>
+	
+	
+<script>
+        function validatePhoneNumber() {
+            // Get the phone number input value
+            var phoneNumber = document.getElementById("phone").value;
+
+            // Regular expression to validate the phone number with optional country code
+            var phoneRegex = /^\+(?:\d{1,3})?[0-9-]+$/;
+
+            // Validate the phone number
+            if (!phoneRegex.test(phoneNumber)) {
+                alert("Please enter a valid phone number with optional country code (e.g., +123456789)");
+                return false;
+            }
+
+            return true;
+        }
+    </script>
+</head>
+
+<body>
+<!-- 	<h1>Please fill the form to proceed further</h1> -->
+   <div class="logo-image-box">
+<!--    <img th:src="@{img/mannitimage.jpg}" class="logo"> -->
+   </div>
+	<!-- Create Form -->
+	<form id="form" th:action="@{http://192.168.1.10:8080/getprebookdetails}" th:object="${details}" method="POST" >
+
+		<div class="form-control">
+			<label for="name" id="label-name">
+			 <i class="fas fa-user"></i> Name
+			</label>
+
+			
+			<input type="text"
+				id="name"
+				placeholder="Enter your name"  th:field="*{name}"  required/>
+		</div>
+
+		<div class="form-control">
+			<label for="phone number" id="label-email">
+				  <i class="bi bi-telephone-fill"></i> Phone Number
+			</label>
+
+		
+			<input type="tel" pattern="[0-9]{10}"
+				id="phone" th:field="*{phone_number}"
+				placeholder="1265438957" required/>
+		</div>
+
+		<div class="form-control">
+			<label for="age" id="label-age">
+				<i class="fas fa-map-marker-alt"></i> Location 
+			</label>
+
+			
+			<input type="text"
+				id="age" th:field="*{address}"
+				placeholder="where are you from?" required/>
+		</div>
+
+       	<div class="form-control">
+			<label for="Products" id="label-age">
+			  <i class="bi bi-box-fill"></i> Products 
+			</label>
+
+		<select id="concern" name="concern" th:field="*{product}">
+		<option th:each="option:${options}" th:text="${option}" th:value="${option}"></option>
+	    
+  
+</select>
+		<!-- 	<input type="text"
+				id="age" th:field="*{concern}"
+				placeholder="whats your concern?" required/> -->
+		</div>
+
+		<div class="form-control"  id="checkbox-container">
+		
+		<label class="container">Product update
+  <input type="checkbox"  th:field="*{productupdate}" value="true" name="productupdate" >
+  <span class="checkmark" style="border:1.5px solid black "></span>
+</label>
+
+<label class="container" th:field="*{newsletter}">News letter
+  <input type="checkbox" value="true" name="newsletter">
+  <span class="checkmark" style="border:1.5px solid black "></span>
+</label>
+		<!-- 	<label for="comment">
+				Any comments
+			</label>
+			<textarea name="comment" id="comment"
+			>
+			</textarea> -->
+		</div>
+		<button type="submit" value="submit" style="font-weight: 600;background-image:linear-gradient(to bottom right,#fdd116,#05c46b)">
+			Submit
+		</button>
+	</form>
+
+	<!-- <div class="upper-bar">
+	 MANNIT INNOVATIONS PRIVATE LIMITED
+	 <hr>
+	 Address:
+     India 3/59 B, 3rd Street,Ragavanagar,Near Ragava Vinayagar Temple,Madipakkam,Chennai - 600091
+	</div> -->
+
+</body>
+</html>
